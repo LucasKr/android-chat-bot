@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ChatBotNews</string>
+    <string name="talk">Enviar Msg</string>
 </resources>
