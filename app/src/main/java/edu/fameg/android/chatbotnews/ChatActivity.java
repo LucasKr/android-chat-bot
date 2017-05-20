@@ -60,9 +60,11 @@ public class ChatActivity extends AppCompatActivity {
 
     public void sendRequest(View view) {
         btnSendMessage.setEnabled(false);
-        addMsgToListView(msgToBot.getText().toString());
+        String msg = msgToBot.getText().toString();
+        addMsgToListView(msg);
+
         final AIRequest request = new AIRequest();
-        request.setQuery("Noticias de esporte por favor");
+        request.setQuery(msg);
 
         new AsyncTask<AIRequest, Void, AIResponse>() {
 
@@ -96,6 +98,13 @@ public class ChatActivity extends AppCompatActivity {
     private void addMsgToListView(String msg) {
         msgs.add(msg);
         ((BaseAdapter) msgsListView.getAdapter()).notifyDataSetChanged();
+        msgsListView.post(new Runnable() {
+            @Override
+            public void run() {
+                // Select the last row so it will scroll into view...
+                msgsListView.setSelection(msgsListView.getCount() - 1);
+            }
+        });
     }
 
 }
